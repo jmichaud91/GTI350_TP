@@ -21,11 +21,26 @@ struct TeamInfo {
     struct TeamMemberInfo               Member3;
     struct TeamMemberInfo               Member4;
     struct TeamMemberInfo               Member5;
+    int                                 Score;
 };
 
+struct GoalInfo {
+    struct TeamMemberInfo Goaler;
+    struct TeamMemberInfo FirstAssist;
+    struct TeamMemberInfo SecondAssist;
+    int                   Period;
+};
+
+- (struct GoalInfo)ConstructGoalInformation;
 - (struct TeamMemberInfo)ConstructMemberInformation: (NSString *)name andNumber:(NSString *)number;
 - (struct TeamInfo)ConstructTeamInformation: (NSString *)teamName andMember1:(struct TeamMemberInfo) member1 andMember2:(struct TeamMemberInfo) member2 andMember3:(struct TeamMemberInfo) member3 andMember4:(struct TeamMemberInfo) member4 andMember5:(struct TeamMemberInfo) member5;
 
 - (void)ShowTeamInfo: (struct TeamInfo)teamInfo;
+
+- (void)startGame;
+
+- (IBAction)textFieldReturn:(id)sender;
+
+- (void)AssignPlayerToGoal: (struct TeamMemberInfo)member;
 @end
 
