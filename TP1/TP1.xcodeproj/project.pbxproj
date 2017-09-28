@@ -17,6 +17,7 @@
 		4BFDD5F51F7D751400844553 /* goal.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4BFDD5F41F7D751400844553 /* goal.jpeg */; };
 		4BFDD5F81F7D76DA00844553 /* accept.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4BFDD5F61F7D76DA00844553 /* accept.jpeg */; };
 		4BFDD5FB1F7D782900844553 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFDD5FA1F7D782900844553 /* cancel.png */; };
+		4BFDD6031F7D8C5D00844553 /* Hockey.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFDD6021F7D8C5D00844553 /* Hockey.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4BFDD5F41F7D751400844553 /* goal.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = goal.jpeg; path = ../../../../Downloads/goal.jpeg; sourceTree = "<group>"; };
 		4BFDD5F61F7D76DA00844553 /* accept.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = accept.jpeg; path = ../../../../Downloads/accept.jpeg; sourceTree = "<group>"; };
 		4BFDD5FA1F7D782900844553 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = ../../../../Downloads/cancel.png; sourceTree = "<group>"; };
+		4BFDD6021F7D8C5D00844553 /* Hockey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hockey.png; path = ../../../../Downloads/Hockey.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		4B599C211F7435B700F36F37 /* TP1 */ = {
 			isa = PBXGroup;
 			children = (
+				4BFDD6021F7D8C5D00844553 /* Hockey.png */,
 				4BFDD5FA1F7D782900844553 /* cancel.png */,
 				4BFDD5F61F7D76DA00844553 /* accept.jpeg */,
 				4BFDD5F41F7D751400844553 /* goal.jpeg */,
@@ -149,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BFDD6031F7D8C5D00844553 /* Hockey.png in Resources */,
 				4B599C321F7435B700F36F37 /* LaunchScreen.storyboard in Resources */,
 				4BFDD5F51F7D751400844553 /* goal.jpeg in Resources */,
 				4BFDD5FB1F7D782900844553 /* cancel.png in Resources */,

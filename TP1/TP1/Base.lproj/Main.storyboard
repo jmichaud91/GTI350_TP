@@ -552,6 +552,25 @@
                                     <action selector="Button_Team2Member5_Click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0QB-3w-e03"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X5y-5B-7nL">
+                                <rect key="frame" x="78" y="596" width="969" height="218"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="XH2-os-TCh">
+                                        <rect key="frame" x="0.0" y="28" width="969" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XH2-os-TCh" id="sDo-mc-x04">
+                                            <rect key="frame" x="0.0" y="0.0" width="969" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="twG-Ni-NEt"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="y8L-S6-d3f"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -615,6 +634,7 @@
                         <outlet property="TextField_NoT2M3" destination="val-3f-DhD" id="05z-70-vxx"/>
                         <outlet property="TextField_NoT2M4" destination="68O-TW-9Yk" id="enM-Mr-OPj"/>
                         <outlet property="TextField_NoT2M5" destination="eph-RM-yZv" id="l72-p3-fZO"/>
+                        <outlet property="UITableView_Goals" destination="X5y-5B-7nL" id="8ll-yI-077"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

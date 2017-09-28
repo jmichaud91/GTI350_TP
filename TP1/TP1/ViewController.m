@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 // Initialisation labels
 @property (weak, nonatomic) IBOutlet UILabel *Label_TeamCreation;
 @property (weak, nonatomic) IBOutlet UILabel *Label_Team1;
@@ -54,6 +54,7 @@
 - (IBAction)Button_Team2Member4_Click:(UIButton *)sender;
 - (IBAction)Button_Team2Member5_Click:(UIButton *)sender;
 
+@property (weak, nonatomic) IBOutlet UITableView *UITableView_Goals;
 
 // Initialisation textfields
 @property (weak, nonatomic) IBOutlet UITextField *TextField_NameTeam1;
@@ -147,6 +148,21 @@
     
     return goalInformation;
 }
+
+#pragma mark - UITableView DataSource Methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _Goals.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellID = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    cell.textLabel.text = _Goals[indexPath.row];
+    
+    return cell;
+}
+
 
 - (void)ShowTeamInfo:(struct TeamInfo)teamInfo {
     NSLog(@"++++ Team information ++++");
@@ -249,6 +265,7 @@
     _Button_Team2Member5_Info.hidden = NO;
     
     _Button_Goal.hidden = NO;
+    _UITableView_Goals.hidden = NO;
 }
 
 - (void)ResetGame {
@@ -267,6 +284,8 @@
     _SecondAssistFound = false;
     _IsFirstTeamGoal = false;
     
+    _UITableView_Goals.hidden = YES;
+    
     _Button_NextPeriod.hidden = YES;
     _Button_Team1Member1_Info.hidden = YES;
     _Button_Team1Member2_Info.hidden = YES;
@@ -282,6 +301,8 @@
     _Button_AcceptGoal.hidden = YES;
     _Button_CancelGoal.hidden = YES;
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -444,6 +465,8 @@
         
         NSLog(@"%@", goalInfo);
         [_Goals addObject:goalInfo];
+        
+        [_UITableView_Goals reloadData];
     }
     
     
