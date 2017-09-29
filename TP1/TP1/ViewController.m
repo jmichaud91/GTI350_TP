@@ -31,6 +31,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *Label_Team2Member3;
 @property (weak, nonatomic) IBOutlet UILabel *Label_Team2Member4;
 @property (weak, nonatomic) IBOutlet UILabel *Label_Team2Member5;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT1M1;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT1M2;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT1M3;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT1M4;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT1M5;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT2M1;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT2M2;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT2M3;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT2M4;
+@property (weak, nonatomic) IBOutlet UITextField *Textfield_LNameT2M5;
+@property (weak, nonatomic) IBOutlet UILabel *Label_LastNameTeam1;
+@property (weak, nonatomic) IBOutlet UILabel *Label_LastNameTeam2;
+@property (weak, nonatomic) IBOutlet UILabel *Label_HowTo;
 
 // Game  button
 @property (weak, nonatomic) IBOutlet UIButton *Button_Team1Member1_Info;
@@ -95,7 +108,7 @@
 // Initialisation functions
 - (IBAction)ResetAllFields:(UIButton *)sender;
 - (IBAction)AcceptAndStartGame:(UIButton *)sender;
-- (struct TeamMemberInfo)ConstructMemberInformation: (NSString *) name andNumber:(NSString *) number;
+- (struct TeamMemberInfo)ConstructMemberInformation:(NSString *)name andLName:(NSString *)lName andNumber:(NSString *)number;
 - (struct TeamInfo)ConstructTeamInformation: (NSString *)teamName andMember1:(struct TeamMemberInfo) member1 andMember2:(struct TeamMemberInfo) member2 andMember3:(struct TeamMemberInfo) member3 andMember4:(struct TeamMemberInfo) member4 andMember5:(struct TeamMemberInfo) member5;
 - (void)ShowTeamInfo:(struct TeamInfo)teamInfo;
 
@@ -115,11 +128,16 @@
 @end
 
 @implementation ViewController
-- (struct TeamMemberInfo)ConstructMemberInformation:(NSString *)name andNumber:(NSString *)number {
+- (struct TeamMemberInfo)ConstructMemberInformation:(NSString *)name andLName:(NSString *)lName andNumber:(NSString *)number {
     struct TeamMemberInfo memberInfo = {
-        .MemberName = name,
-        .MemberNumber = number
+        .MemberName = [[NSString alloc]init],
+        .LastName = [[NSString alloc]init],
+        .MemberNumber = [[NSString alloc]init]
     };
+    
+    memberInfo.MemberName = name;
+    memberInfo.LastName = lName;
+    memberInfo.MemberNumber = number;
     
     return memberInfo;
 }
@@ -164,7 +182,7 @@
 }
 
 
-- (void)ShowTeamInfo:(struct TeamInfo)teamInfo {
+- (void)ShowTeamInfo:(struct TeamInfo)teamInfo { /*
     NSLog(@"++++ Team information ++++");
     NSLog(@"Team name : %@", teamInfo.TeamName);
     NSLog(@"++ Members");
@@ -173,7 +191,7 @@
     NSLog(@"Name : %@ Number : %@", teamInfo.Member3.MemberName, teamInfo.Member3.MemberNumber);
     NSLog(@"Name : %@ Number : %@", teamInfo.Member4.MemberName, teamInfo.Member4.MemberNumber);
     NSLog(@"Name : %@ Number : %@", teamInfo.Member5.MemberName, teamInfo.Member5.MemberNumber);
-    NSLog(@"++++++++++++++++++++++++++");
+    NSLog(@"++++++++++++++++++++++++++"); */
 };
 
 - (void)startGame {
@@ -200,6 +218,16 @@
     _TextField_NameT2M3.hidden = YES;
     _TextField_NameT2M4.hidden = YES;
     _TextField_NameT2M5.hidden = YES;
+    _Textfield_LNameT1M1.hidden = YES;
+    _Textfield_LNameT1M2.hidden = YES;
+    _Textfield_LNameT1M3.hidden = YES;
+    _Textfield_LNameT1M4.hidden = YES;
+    _Textfield_LNameT1M5.hidden = YES;
+    _Textfield_LNameT2M1.hidden = YES;
+    _Textfield_LNameT2M2.hidden = YES;
+    _Textfield_LNameT2M3.hidden = YES;
+    _Textfield_LNameT2M4.hidden = YES;
+    _Textfield_LNameT2M5.hidden = YES;
     
     // Hide labels
     _Label_Team1Members.hidden = YES;
@@ -220,6 +248,8 @@
     _Label_Team2Member3.hidden = YES;
     _Label_Team2Member4.hidden = YES;
     _Label_Team2Member5.hidden = YES;
+    _Label_LastNameTeam1.hidden = YES;
+    _Label_LastNameTeam2.hidden = YES;
     
     // Hide buttons
     _Button_StartCounting.hidden = YES;
@@ -233,25 +263,25 @@
     _Label_TeamCreation.frame = CGRectMake(_Label_TeamCreation.frame.origin.x + _Button_NextPeriod.frame.size.width + 10, _Label_TeamCreation.frame.origin.y, _Label_TeamCreation.frame.size.width, _Label_TeamCreation.frame.size.height);
     
     _Button_NextPeriod.hidden = NO;
-    [_Button_Team1Member1_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team1Information.Member1.MemberName, _Team1Information.Member1.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team1Member1_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team1Information.Member1.MemberName, _Team1Information.Member1.LastName, _Team1Information.Member1.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team1Member2_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team1Information.Member2.MemberName, _Team1Information.Member2.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team1Member2_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team1Information.Member2.MemberName, _Team1Information.Member2.LastName, _Team1Information.Member2.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team1Member3_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team1Information.Member3.MemberName, _Team1Information.Member3.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team1Member3_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team1Information.Member3.MemberName, _Team1Information.Member3.LastName, _Team1Information.Member3.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team1Member4_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team1Information.Member4.MemberName, _Team1Information.Member4.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team1Member4_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team1Information.Member4.MemberName, _Team1Information.Member4.LastName, _Team1Information.Member4.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team1Member5_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team1Information.Member5.MemberName, _Team1Information.Member5.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team1Member5_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team1Information.Member5.MemberName, _Team1Information.Member5.LastName, _Team1Information.Member5.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team2Member1_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team2Information.Member1.MemberName, _Team2Information.Member1.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team2Member1_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team2Information.Member1.MemberName, _Team2Information.Member1.LastName, _Team2Information.Member1.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team2Member2_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team2Information.Member2.MemberName, _Team2Information.Member2.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team2Member2_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team2Information.Member2.MemberName, _Team2Information.Member2.LastName, _Team2Information.Member2.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team2Member3_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team2Information.Member3.MemberName, _Team2Information.Member3.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team2Member3_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team2Information.Member3.MemberName, _Team2Information.Member3.LastName, _Team2Information.Member3.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team2Member4_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team2Information.Member4.MemberName, _Team2Information.Member4.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team2Member4_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team2Information.Member4.MemberName, _Team2Information.Member4.LastName, _Team2Information.Member4.MemberNumber] forState: UIControlStateNormal];
     
-    [_Button_Team2Member5_Info setTitle:[NSString stringWithFormat:@"%@ - #%@", _Team2Information.Member5.MemberName, _Team2Information.Member5.MemberNumber] forState: UIControlStateNormal];
+    [_Button_Team2Member5_Info setTitle:[NSString stringWithFormat:@"%@ %@ - #%@", _Team2Information.Member5.MemberName, _Team2Information.Member5.LastName, _Team2Information.Member5.MemberNumber] forState: UIControlStateNormal];
  
     _Button_Team1Member1_Info.hidden = NO;
     _Button_Team1Member2_Info.hidden = NO;
@@ -297,9 +327,21 @@
     _Button_Team2Member3_Info.hidden = YES;
     _Button_Team2Member4_Info.hidden = YES;
     _Button_Team2Member5_Info.hidden = YES;
+    _Button_Team1Member1_Info.enabled = NO;
+    _Button_Team1Member2_Info.enabled = NO;
+    _Button_Team1Member3_Info.enabled = NO;
+    _Button_Team1Member4_Info.enabled = NO;
+    _Button_Team1Member5_Info.enabled = NO;
+    _Button_Team2Member1_Info.enabled = NO;
+    _Button_Team2Member2_Info.enabled = NO;
+    _Button_Team2Member3_Info.enabled = NO;
+    _Button_Team2Member4_Info.enabled = NO;
+    _Button_Team2Member5_Info.enabled = NO;
+    
     _Button_Goal.hidden = YES;
     _Button_AcceptGoal.hidden = YES;
     _Button_CancelGoal.hidden = YES;
+    _Label_HowTo.hidden = YES;
 }
 
 
@@ -355,15 +397,15 @@
     if (team1InfoAreValids && team2InfoAreValids) {
         NSLog(@"Creating first team.  here are the members : ");
         NSLog(@"Creating member #1 : ");
-        struct TeamMemberInfo team1Member1Info = [self ConstructMemberInformation:_TextField_NameT1M1.text andNumber:_TextField_NoT1M1.text];
+        struct TeamMemberInfo team1Member1Info = [self ConstructMemberInformation:_TextField_NameT1M1.text andLName:_Textfield_LNameT1M1.text andNumber:_TextField_NoT1M1.text];
         NSLog(@"Creating member #2 : ");
-        struct TeamMemberInfo team1Member2Info = [self ConstructMemberInformation:_TextField_NameT1M2.text andNumber:_TextField_NoT1M2.text];
+        struct TeamMemberInfo team1Member2Info = [self ConstructMemberInformation:_TextField_NameT1M2.text andLName:_Textfield_LNameT1M2.text andNumber:_TextField_NoT1M2.text];
         NSLog(@"Creating member #3 : ");
-        struct TeamMemberInfo team1Member3Info = [self ConstructMemberInformation:_TextField_NameT1M3.text andNumber:_TextField_NoT1M3.text];
+        struct TeamMemberInfo team1Member3Info = [self ConstructMemberInformation:_TextField_NameT1M3.text andLName:_Textfield_LNameT1M3.text andNumber:_TextField_NoT1M3.text];
         NSLog(@"Creating member #4 : ");
-        struct TeamMemberInfo team1Member4Info = [self ConstructMemberInformation:_TextField_NameT1M4.text andNumber:_TextField_NoT1M4.text];
+        struct TeamMemberInfo team1Member4Info = [self ConstructMemberInformation:_TextField_NameT1M4.text andLName:_Textfield_LNameT1M4.text andNumber:_TextField_NoT1M4.text];
         NSLog(@"Creating member #5 : ");
-        struct TeamMemberInfo team1Member5Info = [self ConstructMemberInformation:_TextField_NameT1M5.text andNumber:_TextField_NoT1M5.text];
+        struct TeamMemberInfo team1Member5Info = [self ConstructMemberInformation:_TextField_NameT1M5.text andLName:_Textfield_LNameT1M5.text andNumber:_TextField_NoT1M5.text];
         
         _Team1Information = [self ConstructTeamInformation:_TextField_NameTeam1.text
                                                   andMember1:team1Member1Info andMember2:team1Member2Info
@@ -375,15 +417,15 @@
         
         NSLog(@"Creating second team.  here are the members : ");
         NSLog(@"Creating member #1 : ");
-        struct TeamMemberInfo team2Member1Info = [self ConstructMemberInformation:_TextField_NameT2M1.text andNumber:_TextField_NoT2M1.text];
+        struct TeamMemberInfo team2Member1Info = [self ConstructMemberInformation:_TextField_NameT2M1.text andLName:_Textfield_LNameT2M1.text andNumber:_TextField_NoT2M1.text];
         NSLog(@"Creating member #2 : ");
-        struct TeamMemberInfo team2Member2Info = [self ConstructMemberInformation:_TextField_NameT2M2.text andNumber:_TextField_NoT2M2.text];
+        struct TeamMemberInfo team2Member2Info = [self ConstructMemberInformation:_TextField_NameT2M2.text andLName:_Textfield_LNameT2M2.text andNumber:_TextField_NoT2M2.text];
         NSLog(@"Creating member #3 : ");
-        struct TeamMemberInfo team2Member3Info = [self ConstructMemberInformation:_TextField_NameT2M3.text andNumber:_TextField_NoT2M3.text];
+        struct TeamMemberInfo team2Member3Info = [self ConstructMemberInformation:_TextField_NameT2M3.text andLName:_Textfield_LNameT2M3.text andNumber:_TextField_NoT2M3.text];
         NSLog(@"Creating member #4 : ");
-        struct TeamMemberInfo team2Member4Info = [self ConstructMemberInformation:_TextField_NameT2M4.text andNumber:_TextField_NoT2M4.text];
+        struct TeamMemberInfo team2Member4Info = [self ConstructMemberInformation:_TextField_NameT2M4.text andLName:_Textfield_LNameT2M4.text andNumber:_TextField_NoT2M4.text];
         NSLog(@"Creating member #5 : ");
-        struct TeamMemberInfo team2Member5Info = [self ConstructMemberInformation:_TextField_NameT2M5.text andNumber:_TextField_NoT2M5.text];
+        struct TeamMemberInfo team2Member5Info = [self ConstructMemberInformation:_TextField_NameT2M5.text andLName:_Textfield_LNameT2M5.text andNumber:_TextField_NoT2M5.text];
 
         
         _Team2Information = [self ConstructTeamInformation:_TextField_NameTeam2.text
@@ -411,7 +453,10 @@
     }
     else
     {
-        UIAlertController* alert = [UIAlertController                                    alertControllerWithTitle:@"Match finished !"                                    message:@"Current match is finished.  You can not add more period."                                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController
+                                    alertControllerWithTitle:@"Match finished !"
+                                    message:@"Current match is finished.  We will now show this match stars !"
+                                    preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* defaultAction = [UIAlertAction
             actionWithTitle:@"Ok"
@@ -422,6 +467,26 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+- (NSString *)FindMatchStars {
+    NSString* retStars = [[NSString alloc]init];
+    
+    if (_Team1Information.Score > _Team2Information.Score) {
+        // First team won
+        
+    }
+    else if(_Team1Information.Score == _Team2Information.Score) {
+        // Match null
+        
+    }
+    else {
+        // Second team won
+        
+    }
+    
+    return retStars;
+}
+
 - (IBAction)Button_Goal_Click:(UIButton *)sender {
     _Button_Goal.hidden = YES;
     _Button_AcceptGoal.hidden = NO;
@@ -430,6 +495,18 @@
     _CurrentGoalInformation = [self ConstructGoalInformation];
     
     _GoalMode = true;
+    _Label_HowTo.text = @"Goal ! 1. Select your goaler";
+    _Label_HowTo.hidden = NO;
+    _Button_Team1Member1_Info.enabled = YES;
+    _Button_Team1Member2_Info.enabled = YES;
+    _Button_Team1Member3_Info.enabled = YES;
+    _Button_Team1Member4_Info.enabled = YES;
+    _Button_Team1Member5_Info.enabled = YES;
+    _Button_Team2Member1_Info.enabled = YES;
+    _Button_Team2Member2_Info.enabled = YES;
+    _Button_Team2Member3_Info.enabled = YES;
+    _Button_Team2Member4_Info.enabled = YES;
+    _Button_Team2Member5_Info.enabled = YES;
 }
 - (IBAction)Button_AcceptGoal_Click:(UIButton *)sender {
     _CurrentGoalInformation.Period = _CurrentPeriod;
@@ -439,28 +516,35 @@
         if (_FirstAssistFound) {
             if (_SecondAssistFound) {
                 if (_IsFirstTeamGoal) {
-                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@ %@", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.MemberName, _CurrentGoalInformation.FirstAssist.MemberName, _CurrentGoalInformation.SecondAssist.MemberName];
+                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@, %@", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.LastName, _CurrentGoalInformation.FirstAssist.LastName, _CurrentGoalInformation.SecondAssist.LastName];
                 }
                 else {
-                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@ %@", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.MemberName, _CurrentGoalInformation.FirstAssist.MemberName, _CurrentGoalInformation.SecondAssist.MemberName];
+                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@, %@", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.LastName, _CurrentGoalInformation.FirstAssist.LastName, _CurrentGoalInformation.SecondAssist.LastName];
                 }
             }
             else {
                 if (_IsFirstTeamGoal) {
-                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.MemberName, _CurrentGoalInformation.FirstAssist.MemberName];
+                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.LastName, _CurrentGoalInformation.FirstAssist.LastName];
                 }
                 else {
-                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.MemberName, _CurrentGoalInformation.FirstAssist.MemberName];
+                    goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, Assists: %@", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.LastName, _CurrentGoalInformation.FirstAssist.LastName];
                 }
             }
         }
         else {
             if (_IsFirstTeamGoal) {
-                goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, No Assist.", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.MemberName];
+                goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, No Assist.", _CurrentPeriod, _Team1Information.TeamName, _CurrentGoalInformation.Goaler.LastName];
             }
             else {
-                goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, No Assist.", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.MemberName];
+                goalInfo = [NSString stringWithFormat:@"Period #%d Team: %@ - Goaler: %@, No Assist.", _CurrentPeriod, _Team2Information.TeamName, _CurrentGoalInformation.Goaler.LastName];
             }
+        }
+        
+        if (_IsFirstTeamGoal) {
+            _Team1Information.Score++;
+        }
+        else{
+            _Team2Information.Score++;
         }
         
         NSLog(@"%@", goalInfo);
@@ -478,6 +562,17 @@
     _FirstAssistFound = false;
     _SecondAssistFound = false;
     _IsFirstTeamGoal = false;
+    _Label_HowTo.hidden = YES;
+    _Button_Team1Member1_Info.enabled = NO;
+    _Button_Team1Member2_Info.enabled = NO;
+    _Button_Team1Member3_Info.enabled = NO;
+    _Button_Team1Member4_Info.enabled = NO;
+    _Button_Team1Member5_Info.enabled = NO;
+    _Button_Team2Member1_Info.enabled = NO;
+    _Button_Team2Member2_Info.enabled = NO;
+    _Button_Team2Member3_Info.enabled = NO;
+    _Button_Team2Member4_Info.enabled = NO;
+    _Button_Team2Member5_Info.enabled = NO;
     
     [self UpdateToDefaultColor];
 }
@@ -491,6 +586,17 @@
     _FirstAssistFound = false;
     _SecondAssistFound = false;
     _IsFirstTeamGoal = false;
+    _Label_HowTo.hidden = YES;
+    _Button_Team1Member1_Info.enabled = NO;
+    _Button_Team1Member2_Info.enabled = NO;
+    _Button_Team1Member3_Info.enabled = NO;
+    _Button_Team1Member4_Info.enabled = NO;
+    _Button_Team1Member5_Info.enabled = NO;
+    _Button_Team2Member1_Info.enabled = NO;
+    _Button_Team2Member2_Info.enabled = NO;
+    _Button_Team2Member3_Info.enabled = NO;
+    _Button_Team2Member4_Info.enabled = NO;
+    _Button_Team2Member5_Info.enabled = NO;
     
     [self UpdateToDefaultColor];
 }
@@ -515,21 +621,25 @@
                 sender.backgroundColor = UIColor.orangeColor;
                 _CurrentGoalInformation.SecondAssist = member;
                 _SecondAssistFound = true;
+                _Label_HowTo.text = @"Goal ! 4. Accept the goal";
             }
         }
         else if([self CheckIfAssistIsSameAsGoaler:member]){
             sender.backgroundColor = UIColor.cyanColor;
             _CurrentGoalInformation.FirstAssist = member;
             _FirstAssistFound = true;
+            _Label_HowTo.text = @"Goal ! 3. Select your second assist or accept the goal";
         }
     }
     else {
         sender.backgroundColor = UIColor.greenColor;
         _CurrentGoalInformation.Goaler = member;
         _GoalerFound = true;
+        _Label_HowTo.text = @"Goal ! 2. Select your first assist or accept the goal";
         
         if ([self CheckIfMemberParOfteam:member andTeam:_Team1Information]) {
             _IsFirstTeamGoal = true;
+            
         }
     }
 }

@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 struct  TeamMemberInfo {
     __unsafe_unretained NSString        *MemberName;
+    __unsafe_unretained NSString        *LastName;
     __unsafe_unretained NSString        *MemberNumber;
 };
 
@@ -32,7 +33,7 @@ struct GoalInfo {
 };
 
 - (struct GoalInfo)ConstructGoalInformation;
-- (struct TeamMemberInfo)ConstructMemberInformation: (NSString *)name andNumber:(NSString *)number;
+- (struct TeamMemberInfo)ConstructMemberInformation: (NSString *)name andLName:(NSString *)lName andNumber:(NSString *)number;
 - (struct TeamInfo)ConstructTeamInformation: (NSString *)teamName andMember1:(struct TeamMemberInfo) member1 andMember2:(struct TeamMemberInfo) member2 andMember3:(struct TeamMemberInfo) member3 andMember4:(struct TeamMemberInfo) member4 andMember5:(struct TeamMemberInfo) member5;
 
 - (void)ShowTeamInfo: (struct TeamInfo)teamInfo;
@@ -46,5 +47,6 @@ struct GoalInfo {
 - (bool)CheckIfAssistIsSameAsGoaler: (struct TeamMemberInfo)assist;
 - (bool)CheckIfMemberParOfteam: (struct TeamMemberInfo)member andTeam:(struct TeamInfo)team;
 - (void)ShowWrongAssistTeamAlert: (struct TeamMemberInfo)member andTeam: (struct TeamInfo)team;
+- (NSString *)FindMatchStars;
 @end
 
