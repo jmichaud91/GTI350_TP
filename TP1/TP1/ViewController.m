@@ -478,6 +478,8 @@
     _FirstAssistFound = false;
     _SecondAssistFound = false;
     _IsFirstTeamGoal = false;
+    
+    [self UpdateToDefaultColor];
 }
 
 - (IBAction)Button_CancelGoal_Click:(UIButton *)sender {
@@ -489,90 +491,160 @@
     _FirstAssistFound = false;
     _SecondAssistFound = false;
     _IsFirstTeamGoal = false;
+    
+    [self UpdateToDefaultColor];
 }
 
-- (void)AssignPlayerToGoal:(struct TeamMemberInfo)member {
+- (void)UpdateToDefaultColor {
+    _Button_Team1Member1_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team1Member2_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team1Member3_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team1Member4_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team1Member5_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team2Member1_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team2Member2_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team2Member3_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team2Member4_Info.backgroundColor = UIColor.whiteColor;
+    _Button_Team2Member5_Info.backgroundColor = UIColor.whiteColor;
+}
+
+- (void)AssignPlayerToGoal:(struct TeamMemberInfo)member andSender:(UIButton *)sender {
     if (_GoalerFound) {
         if (_FirstAssistFound) {
-            if (!_SecondAssistFound) {
+            if (!_SecondAssistFound && [self CheckIfAssistIsSameAsGoaler:member]) {
+                sender.backgroundColor = UIColor.orangeColor;
                 _CurrentGoalInformation.SecondAssist = member;
                 _SecondAssistFound = true;
             }
         }
-        else {
+        else if([self CheckIfAssistIsSameAsGoaler:member]){
+            sender.backgroundColor = UIColor.cyanColor;
             _CurrentGoalInformation.FirstAssist = member;
             _FirstAssistFound = true;
         }
     }
     else {
+        sender.backgroundColor = UIColor.greenColor;
         _CurrentGoalInformation.Goaler = member;
         _GoalerFound = true;
         
-        if (_Team1Information.Member1.MemberNumber == member.MemberNumber || _Team1Information.Member4.MemberNumber == member.MemberNumber ||
-            _Team1Information.Member2.MemberNumber == member.MemberNumber || _Team1Information.Member5.MemberNumber == member.MemberNumber ||
-            _Team1Information.Member3.MemberNumber == member.MemberNumber) {
+        if ([self CheckIfMemberParOfteam:member andTeam:_Team1Information]) {
             _IsFirstTeamGoal = true;
         }
     }
 }
 
+- (bool) CheckIfAssistIsSameAsGoaler:(struct TeamMemberInfo)assist {
+    bool isSameTeam = false;
+
+    
+    if (_IsFirstTeamGoal) {
+        if ([self CheckIfMemberParOfteam:assist andTeam:_Team1Information]) {
+            isSameTeam = true;
+        }
+        else
+        {
+            [self ShowWrongAssistTeamAlert:assist andTeam:_Team1Information];
+        }
+    }
+    else
+    {
+        if ([self CheckIfMemberParOfteam:assist andTeam:_Team2Information]) {
+            isSameTeam = true;
+        }
+        else
+        {
+            [self ShowWrongAssistTeamAlert:assist andTeam:_Team2Information];
+        }
+    }
+    
+    return isSameTeam;
+}
+
+- (bool)CheckIfMemberParOfteam:(struct TeamMemberInfo)member andTeam:(struct TeamInfo)team {
+    bool yes = false;
+    
+    if (team.Member1.MemberNumber == member.MemberNumber || team.Member4.MemberNumber == member.MemberNumber ||
+        team.Member2.MemberNumber == member.MemberNumber || team.Member5.MemberNumber == member.MemberNumber ||
+        team.Member3.MemberNumber == member.MemberNumber) {
+        yes = true;
+    }
+    
+    return yes;
+}
+
+- (void)ShowWrongAssistTeamAlert:(struct TeamMemberInfo)member andTeam:(struct TeamInfo)team {
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@"Invalid member !"
+                                message:[NSString stringWithFormat:@"Selected assist : %@ - #%@ is not part of previously selected goaling team %@.  If you meant another goaler, please cancel and start over.", member.MemberName, member.MemberNumber, team.TeamName]
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction
+                                    actionWithTitle:@"I Understand"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (IBAction)Button_Team1Member1_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team1Information.Member1];
+        [self AssignPlayerToGoal:_Team1Information.Member1 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team1Member2_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team1Information.Member2];
+        [self AssignPlayerToGoal:_Team1Information.Member2 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team1Member3_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team1Information.Member3];
+        [self AssignPlayerToGoal:_Team1Information.Member3 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team1Member4_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team1Information.Member4];
+        [self AssignPlayerToGoal:_Team1Information.Member4 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team1Member5_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team1Information.Member5];
+        [self AssignPlayerToGoal:_Team1Information.Member5 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team2Member1_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team2Information.Member1];
+        [self AssignPlayerToGoal:_Team2Information.Member1 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team2Member2_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team2Information.Member2];
+        [self AssignPlayerToGoal:_Team2Information.Member2 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team2Member3_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team2Information.Member3];
+        [self AssignPlayerToGoal:_Team2Information.Member3 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team2Member4_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team2Information.Member4];
+        [self AssignPlayerToGoal:_Team2Information.Member4 andSender:sender];
     }
 }
 
 - (IBAction)Button_Team2Member5_Click:(UIButton *)sender {
     if (_GoalMode) {
-        [self AssignPlayerToGoal:_Team2Information.Member5];
+        [self AssignPlayerToGoal:_Team2Information.Member5 andSender:sender];
     }
 }
 

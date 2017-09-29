@@ -41,6 +41,10 @@ struct GoalInfo {
 
 - (IBAction)textFieldReturn:(id)sender;
 
-- (void)AssignPlayerToGoal: (struct TeamMemberInfo)member;
+- (void)AssignPlayerToGoal: (struct TeamMemberInfo)member andSender:(UIButton *)sender;
+- (void)UpdateToDefaultColor;
+- (bool)CheckIfAssistIsSameAsGoaler: (struct TeamMemberInfo)assist;
+- (bool)CheckIfMemberParOfteam: (struct TeamMemberInfo)member andTeam:(struct TeamInfo)team;
+- (void)ShowWrongAssistTeamAlert: (struct TeamMemberInfo)member andTeam: (struct TeamInfo)team;
 @end
 
