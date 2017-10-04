@@ -378,20 +378,149 @@
     
 }
 
-- (IBAction)AcceptAndStartGame:(UIButton *)sender {
-    bool team1InfoAreValids = false;
-    bool team2InfoAreValids = false;
+- (void)ShowWrongLengthAlert:(NSString *)controlName {
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@"Invalid text length !"
+                                message:[NSString stringWithFormat:@"Length must be bigger then 0 and lower then 9."]
+                                preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction* defaultAction = [UIAlertAction
+                                    actionWithTitle:@"I Understand"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
+- (IBAction)AcceptAndStartGame:(UIButton *)sender {
+    bool team1InfoAreValids = true;
+    bool team2InfoAreValids = true;
     
-    if (_TextField_NameTeam1.text.length > 0 && _TextField_NoT1M1.text.length > 0 && _TextField_NoT1M2.text.length > 0 && _TextField_NoT1M3.text.length > 0 && _TextField_NoT1M4.text.length > 0 && _TextField_NoT1M5.text.length > 0) {
-        team1InfoAreValids = true;
-        NSLog(@"Team 1 informations are ok !");
+    // Validate numbers length
+    if (![self ValidateTextfield:_TextField_NoT1M1]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 1 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT1M2]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 2 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT1M3]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 3 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT1M4]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 4 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT1M5]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 5 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT2M1]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 1 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT2M2]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 2 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT2M3]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 3 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT2M4]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 4 Number"];
+    }
+    if (![self ValidateTextfield:_TextField_NoT2M5]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 5 Number"];
     }
     
-    if (_TextField_NameTeam2.text.length > 0 && _TextField_NoT2M1.text.length > 0 && _TextField_NoT2M2.text.length > 0 && _TextField_NoT2M3.text.length > 0 && _TextField_NoT2M4.text.length > 0 && _TextField_NoT2M5.text.length > 0) {
-        team2InfoAreValids = true;
-        NSLog(@"Team 2 informations are ok !");
+    // Validate last name length
+    if (![self ValidateTextfield:_Textfield_LNameT1M1]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 1 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT1M2]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 2 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT1M3]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 3 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT1M4]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 4 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT1M5]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 5 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT2M1]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 1 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT2M2]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 2 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT2M3]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 3 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT2M4]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 4 Last name"];
+    }
+    if (![self ValidateTextfield:_Textfield_LNameT2M5]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 5 Last name"];
+    }
+    
+    // Validate name length
+    if (![self ValidateTextfield:_TextField_NameT1M1]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 1 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT1M2]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 2 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT1M3]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 3 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT1M4]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 4 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT1M5]) {
+        team1InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 1 Member 5 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT2M1]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 1 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT2M2]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 2 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT2M3]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 3 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT2M4]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 4 First name"];
+    }
+    if (![self ValidateTextfield:_TextField_NameT2M5]) {
+        team2InfoAreValids = false;
+        [self ShowWrongLengthAlert:@"Team 2 Member 5 First name"];
     }
     
     if (team1InfoAreValids && team2InfoAreValids) {
@@ -459,32 +588,176 @@
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* defaultAction = [UIAlertAction
-            actionWithTitle:@"Ok"
-            style:UIAlertActionStyleDefault
-            handler:^(UIAlertAction * action) {}];
+                                        actionWithTitle:@"Ok"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action) {}];
         
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
+        
+        [self FindMatchStars];
     }
+    
+    if (_CurrentPeriod == 3) {
+        [_Button_NextPeriod setImage:[UIImage imageNamed:@"star.png"] forState:UIControlStateNormal];
+    }
+    
 }
 
-- (NSString *)FindMatchStars {
-    NSString* retStars = [[NSString alloc]init];
+- (void)FindMatchStars {
+    struct TeamMemberInfo firstStar;
+    struct TeamMemberInfo secondStar;
+    struct TeamMemberInfo thirdStar;
     
     if (_Team1Information.Score > _Team2Information.Score) {
         // First team won
-        
+        firstStar = [self GetFirstStar:_Team1Information];
+        secondStar = [self GetSecondtStar:_Team1Information andFirstStart:firstStar];
+        thirdStar = [self GetThirdtStar:_Team1Information andFirstStart:firstStar andSndStar:secondStar];
     }
     else if(_Team1Information.Score == _Team2Information.Score) {
         // Match null
+        firstStar = [self GetFirstStar:_Team1Information];
+        secondStar = [self GetFirstStar:_Team2Information];
         
+        struct TeamMemberInfo tmpThirdStar1 = [self GetSecondtStar:_Team1Information andFirstStart:firstStar];
+        struct TeamMemberInfo tmpThirdStar2 = [self GetSecondtStar:_Team2Information andFirstStart:secondStar];
+        
+        if (tmpThirdStar1.Score > tmpThirdStar2.Score) {
+            thirdStar = tmpThirdStar1;
+        }
+        else
+        {
+            thirdStar = tmpThirdStar2;
+        }
     }
     else {
         // Second team won
-        
+        firstStar = [self GetFirstStar:_Team2Information];
+        secondStar = [self GetSecondtStar:_Team2Information andFirstStart:firstStar];
+        thirdStar = [self GetThirdtStar:_Team2Information andFirstStart:firstStar andSndStar:secondStar];
     }
     
-    return retStars;
+    _Label_HowTo.text = [NSString stringWithFormat:@"[*** Match Stars *** | #1: %@ %dG %dA | #2: %@ %dG %dA | #3: %@ %dG %dA]", firstStar.LastName, firstStar.Buts, firstStar.Assists, secondStar.LastName, secondStar.Buts, secondStar.Assists, thirdStar.LastName, thirdStar.Buts, thirdStar.Assists];
+    
+    _Label_HowTo.hidden = NO;
+    _Button_Goal.hidden = YES;
+}
+
+- (struct TeamMemberInfo) GetThirdtStar:(struct TeamInfo)team andFirstStart:(struct TeamMemberInfo)firstStar andSndStar:(struct TeamMemberInfo)sndStar {
+    int* highestScore = 0;
+    NSString *memberNumber = 0;
+    
+    if (team.Member1.Score > highestScore && team.Member1.MemberNumber != firstStar.MemberNumber && team.Member1.MemberNumber != sndStar.MemberNumber) {
+        highestScore = team.Member1.Score;
+        memberNumber = team.Member1.MemberNumber;
+    }
+    
+    if (team.Member2.Score > highestScore && team.Member2.MemberNumber != firstStar.MemberNumber && team.Member2.MemberNumber != sndStar.MemberNumber) {
+        highestScore = team.Member2.Score;
+        memberNumber = team.Member2.MemberNumber;
+    }
+    
+    if (team.Member3.Score > highestScore && team.Member3.MemberNumber != firstStar.MemberNumber && team.Member3.MemberNumber != sndStar.MemberNumber) {
+        highestScore = team.Member3.Score;
+        memberNumber = team.Member3.MemberNumber;
+    }
+    
+    if (team.Member4.Score > highestScore && team.Member4.MemberNumber != firstStar.MemberNumber && team.Member4.MemberNumber != sndStar.MemberNumber) {
+        highestScore = team.Member4.Score;
+        memberNumber = team.Member4.MemberNumber;
+    }
+    
+    if (team.Member5.Score > highestScore && team.Member5.MemberNumber != firstStar.MemberNumber && team.Member5.MemberNumber != sndStar.MemberNumber) {
+        highestScore = team.Member5.Score;
+        memberNumber = team.Member5.MemberNumber;
+    }
+    
+    return [self GetMemberWithNumber:team andNumber:memberNumber];
+}
+
+- (struct TeamMemberInfo) GetSecondtStar:(struct TeamInfo)team andFirstStart:(struct TeamMemberInfo)firstStar {
+    int* highestScore = 0;
+    NSString *memberNumber = 0;
+    
+    if (team.Member1.Score > highestScore && team.Member1.MemberNumber != firstStar.MemberNumber) {
+        highestScore = team.Member1.Score;
+        memberNumber = team.Member1.MemberNumber;
+    }
+    
+    if (team.Member2.Score > highestScore && team.Member2.MemberNumber != firstStar.MemberNumber) {
+        highestScore = team.Member2.Score;
+        memberNumber = team.Member2.MemberNumber;
+    }
+    
+    if (team.Member3.Score > highestScore && team.Member3.MemberNumber != firstStar.MemberNumber) {
+        highestScore = team.Member3.Score;
+        memberNumber = team.Member3.MemberNumber;
+    }
+    
+    if (team.Member4.Score > highestScore && team.Member4.MemberNumber != firstStar.MemberNumber) {
+        highestScore = team.Member4.Score;
+        memberNumber = team.Member4.MemberNumber;
+    }
+    
+    if (team.Member5.Score > highestScore && team.Member5.MemberNumber != firstStar.MemberNumber) {
+        highestScore = team.Member5.Score;
+        memberNumber = team.Member5.MemberNumber;
+    }
+    
+    return [self GetMemberWithNumber:team andNumber:memberNumber];
+}
+
+- (struct TeamMemberInfo) GetFirstStar:(struct TeamInfo)team {
+    int* highestScore = 0;
+    NSString *memberNumber = 0;
+    
+    if (team.Member1.Score > highestScore) {
+        highestScore = team.Member1.Score;
+        memberNumber = team.Member1.MemberNumber;
+    }
+    
+    if (team.Member2.Score > highestScore) {
+        highestScore = team.Member2.Score;
+        memberNumber = team.Member2.MemberNumber;
+    }
+    
+    if (team.Member3.Score > highestScore) {
+        highestScore = team.Member3.Score;
+        memberNumber = team.Member3.MemberNumber;
+    }
+    
+    if (team.Member4.Score > highestScore) {
+        highestScore = team.Member4.Score;
+        memberNumber = team.Member4.MemberNumber;
+    }
+    
+    if (team.Member5.Score > highestScore) {
+        highestScore = team.Member5.Score;
+        memberNumber = team.Member5.MemberNumber;
+    }
+    
+    return [self GetMemberWithNumber:team andNumber:memberNumber];
+}
+
+- (struct TeamMemberInfo) GetMemberWithNumber:(struct TeamInfo)team andNumber:(NSString *)memberNumber {
+    if (team.Member1.MemberNumber == memberNumber) {
+        return team.Member1;
+    }
+    
+    if (team.Member2.MemberNumber == memberNumber) {
+        return team.Member2;
+    }
+    
+    if (team.Member3.MemberNumber == memberNumber) {
+        return team.Member3;
+    }
+    
+    if (team.Member4.MemberNumber == memberNumber) {
+        return team.Member4;
+    }
+    
+    return team.Member5;
 }
 
 - (IBAction)Button_Goal_Click:(UIButton *)sender {
@@ -508,6 +781,151 @@
     _Button_Team2Member4_Info.enabled = YES;
     _Button_Team2Member5_Info.enabled = YES;
 }
+
+- (void) GiveGoalPoints {
+    if (_IsFirstTeamGoal) {
+        if (_GoalerFound) {
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team1Information.Member1.MemberNumber) {
+                _Team1Information.Member1.Score += 2;
+                _Team1Information.Member1.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team1Information.Member2.MemberNumber) {
+                _Team1Information.Member2.Score += 2;
+                _Team1Information.Member2.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team1Information.Member3.MemberNumber) {
+                _Team1Information.Member3.Score += 2;
+                _Team1Information.Member3.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team1Information.Member4.MemberNumber) {
+                _Team1Information.Member4.Score += 2;
+                _Team1Information.Member4.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team1Information.Member5.MemberNumber) {
+                _Team1Information.Member5.Score += 2;
+                _Team1Information.Member5.Buts++;
+            }
+        }
+        
+        if (_FirstAssistFound) {
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team1Information.Member1.MemberNumber) {
+                _Team1Information.Member1.Score += 1;
+                _Team1Information.Member1.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team1Information.Member2.MemberNumber) {
+                _Team1Information.Member2.Score += 1;
+                _Team1Information.Member2.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team1Information.Member3.MemberNumber) {
+                _Team1Information.Member3.Score += 1;
+                _Team1Information.Member3.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team1Information.Member4.MemberNumber) {
+                _Team1Information.Member4.Score += 1;
+                _Team1Information.Member4.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team1Information.Member5.MemberNumber) {
+                _Team1Information.Member5.Score += 1;
+                _Team1Information.Member5.Assists++;
+            }
+        }
+        
+        if (_SecondAssistFound) {
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team1Information.Member1.MemberNumber) {
+                _Team1Information.Member1.Score += 1;
+                _Team1Information.Member1.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team1Information.Member2.MemberNumber) {
+                _Team1Information.Member2.Score += 1;
+                _Team1Information.Member2.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team1Information.Member3.MemberNumber) {
+                _Team1Information.Member3.Score += 1;
+                _Team1Information.Member3.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team1Information.Member4.MemberNumber) {
+                _Team1Information.Member4.Score += 1;
+                _Team1Information.Member4.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team1Information.Member5.MemberNumber) {
+                _Team1Information.Member5.Score += 1;
+                _Team1Information.Member5.Assists++;
+            }
+        }
+    }
+    else
+    {
+        if (_GoalerFound) {
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team2Information.Member1.MemberNumber) {
+                _Team2Information.Member1.Score += 2;
+                _Team2Information.Member1.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team2Information.Member2.MemberNumber) {
+                _Team2Information.Member2.Score += 2;
+                _Team2Information.Member2.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team2Information.Member3.MemberNumber) {
+                _Team2Information.Member3.Score += 2;
+                _Team2Information.Member3.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team2Information.Member4.MemberNumber) {
+                _Team2Information.Member4.Score += 2;
+                _Team2Information.Member4.Buts++;
+            }
+            if (_CurrentGoalInformation.Goaler.MemberNumber == _Team2Information.Member5.MemberNumber) {
+                _Team2Information.Member5.Score += 2;
+                _Team2Information.Member5.Buts++;
+            }
+        }
+        
+        if (_FirstAssistFound) {
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team2Information.Member1.MemberNumber) {
+                _Team2Information.Member1.Score += 1;
+                _Team2Information.Member1.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team2Information.Member2.MemberNumber) {
+                _Team2Information.Member2.Score += 1;
+                _Team2Information.Member2.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team2Information.Member3.MemberNumber) {
+                _Team2Information.Member3.Score += 1;
+                _Team2Information.Member3.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team2Information.Member4.MemberNumber) {
+                _Team2Information.Member4.Score += 1;
+                _Team2Information.Member4.Assists++;
+            }
+            if (_CurrentGoalInformation.FirstAssist.MemberNumber == _Team2Information.Member5.MemberNumber) {
+                _Team2Information.Member5.Score += 1;
+                _Team2Information.Member5.Assists++;
+            }
+        }
+        
+        if (_SecondAssistFound) {
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team2Information.Member1.MemberNumber) {
+                _Team2Information.Member1.Score += 1;
+                _Team2Information.Member1.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team2Information.Member2.MemberNumber) {
+                _Team2Information.Member2.Score += 1;
+                _Team2Information.Member2.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team2Information.Member3.MemberNumber) {
+                _Team2Information.Member3.Score += 1;
+                _Team2Information.Member3.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team2Information.Member4.MemberNumber) {
+                _Team2Information.Member4.Score += 1;
+                _Team2Information.Member4.Assists++;
+            }
+            if (_CurrentGoalInformation.SecondAssist.MemberNumber == _Team2Information.Member5.MemberNumber) {
+                _Team2Information.Member5.Score += 1;
+                _Team2Information.Member5.Assists++;
+            }
+        }
+    }
+}
+
 - (IBAction)Button_AcceptGoal_Click:(UIButton *)sender {
     _CurrentGoalInformation.Period = _CurrentPeriod;
     
@@ -542,10 +960,15 @@
         
         if (_IsFirstTeamGoal) {
             _Team1Information.Score++;
+            _Label_Team1.text = [NSString stringWithFormat:@"%@ %d", _Team1Information.TeamName, _Team1Information.Score];
         }
         else{
             _Team2Information.Score++;
+            _Label_Team2.text = [NSString stringWithFormat:@"%@ %d", _Team2Information.TeamName, _Team2Information.Score];
         }
+        
+        // For stars purpose
+        [self GiveGoalPoints];
         
         NSLog(@"%@", goalInfo);
         [_Goals addObject:goalInfo];
@@ -639,7 +1062,6 @@
         
         if ([self CheckIfMemberParOfteam:member andTeam:_Team1Information]) {
             _IsFirstTeamGoal = true;
-            
         }
     }
 }
@@ -756,6 +1178,21 @@
     if (_GoalMode) {
         [self AssignPlayerToGoal:_Team2Information.Member5 andSender:sender];
     }
+}
+
+- (bool)ValidateTextfield:(UITextField *)textfield {
+    bool isValid = false;
+    
+    if (textfield.text.length > 0 && textfield.text.length < 9) {
+        isValid = true;
+        textfield.backgroundColor = UIColor.whiteColor;
+    }
+    else
+    {
+        textfield.backgroundColor = UIColor.redColor;
+    }
+    
+    return isValid;
 }
 
 @end

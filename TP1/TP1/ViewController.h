@@ -13,6 +13,9 @@ struct  TeamMemberInfo {
     __unsafe_unretained NSString        *MemberName;
     __unsafe_unretained NSString        *LastName;
     __unsafe_unretained NSString        *MemberNumber;
+    int                                 Buts;
+    int                                 Assists;
+    int                                 *Score;
 };
 
 struct TeamInfo {
@@ -47,6 +50,14 @@ struct GoalInfo {
 - (bool)CheckIfAssistIsSameAsGoaler: (struct TeamMemberInfo)assist;
 - (bool)CheckIfMemberParOfteam: (struct TeamMemberInfo)member andTeam:(struct TeamInfo)team;
 - (void)ShowWrongAssistTeamAlert: (struct TeamMemberInfo)member andTeam: (struct TeamInfo)team;
-- (NSString *)FindMatchStars;
+- (void)FindMatchStars;
+- (bool)ValidateTextfield: (UITextField *)textfield;
+- (void)ShowWrongLengthAlert: (NSString *)controlName;
+- (void)GiveGoalPoints;
+- (struct TeamMemberInfo)GetMemberWithNumber: (struct TeamInfo)team andNumber:(NSString *)memberNumber;
+
+- (struct TeamMemberInfo)GetFirstStar: (struct TeamInfo)team;
+- (struct TeamMemberInfo)GetSecondtStar: (struct TeamInfo)team andFirstStart: (struct TeamMemberInfo)firstStar;
+- (struct TeamMemberInfo)GetThirdtStar: (struct TeamInfo)team andFirstStart: (struct TeamMemberInfo)firstStar andSndStar: (struct TeamMemberInfo)sndStar;
 @end
 
