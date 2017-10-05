@@ -1,0 +1,7 @@
+#Thu Oct 05 15:36:10 EDT 2017
+base.0=/Users/an17410/TP2/TP2_Equipe3/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e0b2f6b4b15fe9fc0e6221901c2046709946441d
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/an17410/TP2/TP2_Equipe3/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c5388aa1b7ae0865827e59315fdbea52cb0cfa15/classes.dex
+base.1=/Users/an17410/TP2/TP2_Equipe3/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c5388aa1b7ae0865827e59315fdbea52cb0cfa15
+file.0=/Users/an17410/TP2/TP2_Equipe3/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e0b2f6b4b15fe9fc0e6221901c2046709946441d/classes.dex
